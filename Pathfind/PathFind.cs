@@ -129,8 +129,7 @@ namespace FranciscoSarabia {
 
                     for (int j = 0; j < board.grid.GetLength(1); j++) {
 
-                        board.grid[i, j].Distance = int.MaxValue;
-                        board.grid[i, j].Previous = null;
+                        board.grid[i, j].ResetPathfindingInThisNode();
 
                     }
 

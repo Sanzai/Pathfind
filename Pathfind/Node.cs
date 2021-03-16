@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace FranciscoSarabia {
 
@@ -9,7 +10,7 @@ namespace FranciscoSarabia {
             private int distance;
             private float heuristic;
             private Node previous;
-            private Position position;
+            private int x, y;
 
             #region Properties
 
@@ -34,9 +35,14 @@ namespace FranciscoSarabia {
 
             }
 
-            public Position Position {
-                get => position;
-                set => position = value;
+            public int X {
+                get => x;
+                set => x = value;
+            }
+
+            public int Y {
+                get => y;
+                set => y = value;
             }
 
             #endregion
@@ -45,9 +51,9 @@ namespace FranciscoSarabia {
 
             public Node(int x, int y) {
 
-
                 ResetPathfindingInThisNode();
-                position = new Position(x, y);
+                this.x = x;
+                this.y = y;
 
             }
 
@@ -59,7 +65,19 @@ namespace FranciscoSarabia {
 
             }
 
-            public static bool operator == (Node a, Node b) {
+            public static implicit operator Vector2(Node node) {
+
+                return new Vector2(node.x, node.y);
+
+            }
+
+            public static implicit operator Vector3(Node node) {
+
+                return new Vector3(node.x, node.y, 0);
+
+            }
+
+            public static bool operator ==(Node a, Node b) {
 
                 if (a is null || b is null) {
 
@@ -67,7 +85,7 @@ namespace FranciscoSarabia {
 
                 }
 
-                return a.position == b.position;
+                return (a.x == b.x && a.y == b.y);
 
             }
 
@@ -83,7 +101,7 @@ namespace FranciscoSarabia {
 
                     Node node = (Node)obj;
 
-                    return position == node.position;
+                    return x == node.x && y == node.y;
 
                 }
 
@@ -91,15 +109,21 @@ namespace FranciscoSarabia {
 
             }
 
-            public bool Equals(Node other) {
+            public bool Equals(Node node) {
 
-                return position == other.position;
+                return x == node.x && y == node.y;
 
             }
 
             public override int GetHashCode() {
 
-                return position.GetHashCode();
+                return x ^ y;
+
+            }
+
+            public override string ToString() {
+
+                return $"Node [{x}, {y}]";
 
             }
 

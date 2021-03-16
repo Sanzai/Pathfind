@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace FranciscoSarabia {
 
@@ -34,7 +35,7 @@ namespace FranciscoSarabia {
 
             public bool IsInGrid(Node node) {
 
-                return !OutOfBounds(node.Position) && grid[node.Position.x, node.Position.y] == node;
+                return !OutOfBounds(node.X, node.Y) && grid[node.X, node.Y] == node;
 
             }
 
@@ -52,11 +53,11 @@ namespace FranciscoSarabia {
 
                     for (int i = -1; i <= 1; i++) {
 
-                        positionX = node.Position.x + i;
+                        positionX = node.X + i;
 
                         for (int j = -1; j <= 1; j++) {
 
-                            positionY = node.Position.y + j;
+                            positionY = node.Y + j;
 
                             if (!OutOfBounds(positionX, positionY) && grid[positionX, positionY] != node) {
 
@@ -71,12 +72,6 @@ namespace FranciscoSarabia {
                 }
 
                 return neighbours;
-
-            }
-
-            private bool OutOfBounds(Position pos) {
-
-                return OutOfBounds(pos.x, pos.y);
 
             }
 

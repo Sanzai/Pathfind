@@ -14,7 +14,7 @@ namespace FranciscoSarabia {
             /// <returns></returns>
             public static float ManhattanHeuristicFunction(Node actualNode, Node destinationNode) {
 
-                return Mathf.Abs(destinationNode.Position.x - actualNode.Position.x) + Mathf.Abs(destinationNode.Position.y - actualNode.Position.y);
+                return Mathf.Abs(destinationNode.X - actualNode.X) + Mathf.Abs(destinationNode.Y - actualNode.Y);
 
             }
 
@@ -26,8 +26,8 @@ namespace FranciscoSarabia {
             /// <returns></returns>
             public static float DiagonalDistanceHeuristicFunction(Node actualNode, Node destinationNode) {
 
-                int distanceX = Mathf.Abs(destinationNode.Position.x - actualNode.Position.x);
-                int distanceY = Mathf.Abs(destinationNode.Position.y - actualNode.Position.y);
+                int distanceX = Mathf.Abs(destinationNode.X - actualNode.X);
+                int distanceY = Mathf.Abs(destinationNode.Y - actualNode.Y);
 
                 return (distanceX + distanceY) - 1 * Mathf.Min(distanceX, distanceY); //Chebyshev distance because all movements cost 1
 
